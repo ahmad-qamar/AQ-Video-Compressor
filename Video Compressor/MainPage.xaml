@@ -25,22 +25,25 @@
                 FontSize="Small"
                 Text="Select File(s)"
                 SemanticProperties.Hint="Select Folder which contains the videos"
-                BackgroundColor="WhiteSmoke"
+                BackgroundColor="White"
+                TextColor="Black"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
                 <Button
                 x:Name="StartBtn"
                 FontSize="Small"
                 Text="Start"
+                TextColor="White"
                 BackgroundColor="Green"
-                Clicked="OnStartClicked"
+                Clicked="StartBtn_Clicked"
                 HorizontalOptions="Center" />
                 <Button
                 x:Name="StopBtn"
                 FontSize="Small"
                 Text="Stop"
+                TextColor="LightGray"
                 BackgroundColor="DarkRed"
-                Clicked="OnStopClicked"
+                Clicked="StopBtn_Clicked"
                 HorizontalOptions="Center" />
             </HorizontalStackLayout>
 
