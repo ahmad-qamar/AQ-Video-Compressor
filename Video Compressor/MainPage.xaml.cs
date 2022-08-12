@@ -2,10 +2,13 @@
 
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    private readonly IFolderPicker _folderPicker;
+    public MainPage(IFolderPicker folderPicker)
     {
         InitializeComponent();
         listView.BindingContext = this;
+
+        _folderPicker = folderPicker;
     }
     private async void OnCounterClicked(object sender, EventArgs e)
     {
@@ -34,12 +37,24 @@ public partial class MainPage : ContentPage
 
     private void StartBtn_Clicked(object sender, EventArgs e)
     {
-        
+
+    }
+    string folderLoc = "";
+    private async void FolderBtn_Clicked(object sender, EventArgs e)
+    {
+        folderLoc = await _folderPicker.PickFolder();
     }
 
-    private void StopBtn_Clicked(object sender, EventArgs e)
+    private async void StopBtn_Clicked(object sender, EventArgs e)
     {
+        try
+        {
 
+        }
+        catch (Exception ex)
+        {
+            //Something went wrong.
+        }
     }
 }
 

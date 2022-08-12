@@ -31,15 +31,33 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <StackLayout
+                Margin="20"
+                Orientation="Horizontal" 
+                VerticalOptions="Start"
+                HorizontalOptions="Center">
+                    <Label Text="Add suffix '-recovered'"
+                        VerticalOptions="Center" />
+                    <CheckBox IsChecked="true" x:Name="checkbox_Suffix"/>
+            </StackLayout>
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button
                 x:Name="CounterBtn"
                 FontSize="Small"
                 Text="Select File(s)"
-                SemanticProperties.Hint="Select Folder which contains the videos"
+                SemanticProperties.Hint="Select the video files."
                 BackgroundColor="White"
                 TextColor="Black"
                 Clicked="OnCounterClicked"
+                HorizontalOptions="Center" />
+                <Button
+                x:Name="FolderBtn"
+                FontSize="Small"
+                Text="Select Folder"
+                SemanticProperties.Hint="Select Folder for output"
+                BackgroundColor="White"
+                TextColor="Black"
+                Clicked="FolderBtn_Clicked"
                 HorizontalOptions="Center" />
                 <Button
                 x:Name="StartBtn"
