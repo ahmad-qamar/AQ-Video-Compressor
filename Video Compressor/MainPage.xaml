@@ -19,6 +19,18 @@
                 
                 HorizontalOptions="Start" />
             </Frame>
+            <ListView x:Name="listView" ItemsSource="{Binding VideoLocations}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding}"
+                                   TextColor="White"
+                                   Margin="0,3"
+                                />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button
                 x:Name="CounterBtn"
