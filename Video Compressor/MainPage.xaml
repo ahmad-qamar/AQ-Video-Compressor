@@ -35,12 +35,22 @@
             <HorizontalStackLayout
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
-                <VerticalStackLayout Margin="50,0" MinimumWidthRequest="120">
+                <VerticalStackLayout  Margin="20,0">
+                    <Label Text="NVENC" Margin="20,0"
+                        VerticalOptions="Center" />
+                    <CheckBox IsChecked="False" CheckedChanged="nvencCheckbox_CheckedChanged" x:Name="nvencCheckbox" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="20,0">
+                    <Label Text="Preset" 
+                        HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Picker x:Name="presetPicker" ItemsSource="{Binding Speed}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="20,0" MinimumWidthRequest="120">
                     <Label Text="CPU Threads" x:Name="threadLabel"
                         HorizontalOptions="Center" VerticalOptions="Center" />
                     <Slider x:Name="cpuThreads" Minimum="1" Maximum="32"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout>
+                <VerticalStackLayout  Margin="20,0">
                     <Label Text="Add suffix '-cmp'"
                         VerticalOptions="Center" />
                     <CheckBox IsChecked="true" x:Name="checkbox_Suffix" HorizontalOptions="Center"/>
@@ -49,19 +59,19 @@
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button
                 x:Name="CounterBtn"
-                FontSize="Small"
+                FontSize="19"
                 Text="Select File(s)"
                 SemanticProperties.Hint="Select the video files."
-                BackgroundColor="White"
+                BackgroundColor="#F6F6F6"
                 TextColor="Black"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
                 <Button
                 x:Name="FolderBtn"
-                FontSize="Small"
+                FontSize="19"
                 Text="Select Folder"
                 SemanticProperties.Hint="Select Folder for output"
-                BackgroundColor="White"
+                BackgroundColor="#F6F6F6"
                 TextColor="Black"
                 Clicked="FolderBtn_Clicked"
                 HorizontalOptions="Center" />
