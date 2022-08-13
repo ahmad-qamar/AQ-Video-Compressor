@@ -12,6 +12,9 @@ namespace Video_Compressor.Platforms.Windows
         private int _processingCount = 0;
         private Queue<FFMpegVideo> _queue = new();
         public int ActiveThreads { get; set; }
+        public Speed Speed { get; set; } = Speed.Faster;
+        public bool NVENC { get; set; }
+
         public event IFFMpegPlugin.OnProgress Progress;
         public void Queue(string inputPath, string outputFolder, bool addSuffix)
         {
@@ -34,12 +37,23 @@ namespace Video_Compressor.Platforms.Windows
                         Progress?.Invoke((p / 100), _processingCount, outputPath);
                     });
 
-                    var args = FFMpegArguments
+                    var args = NVENC ? FFMpegArguments
+                        .FromFileInput(vid.InputPath)
+                        .OutputToFile(outputPath
+                        , true, options => options
+                            //.WithCustomArgument("-hwaccel cuda -hwaccel_output_format cuda")
+                            .WithVideoCodec("hevc_nvenc")
+                            .WithAudioCodec(AudioCodec.Aac)
+                            .WithCustomArgument("-qmin 20 -qmax 52")
+                            .WithFastStart())
+                        .NotifyOnProgress(progressHandler, (await FFProbe.AnalyseAsync(vid.InputPath)).Duration) 
+                        
+                        : FFMpegArguments
                         .FromFileInput(vid.InputPath)
                         .OutputToFile(outputPath
                         , true, options => options
                             .WithVideoCodec(VideoCodec.LibX264)
-                            .WithSpeedPreset(Speed.Faster)
+                            .WithSpeedPreset(Speed)
                             .WithConstantRateFactor(21)
                             .WithAudioCodec(AudioCodec.Aac)
                             .UsingThreads(ActiveThreads)
