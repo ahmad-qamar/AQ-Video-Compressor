@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Video_Compressor.MainPage">
+             x:Class="Video_Compressor.MainPage" BackgroundColor="#121212">
 
     <ScrollView>
         <VerticalStackLayout
@@ -19,7 +19,8 @@
                 
                 HorizontalOptions="Start" />
             </Frame>
-            <ListView x:Name="listView" ItemsSource="{Binding VideoLocations}" MaximumHeightRequest="280">
+            <ListView x:Name="listView" ItemsSource="{Binding VideoLocations}" MinimumHeightRequest="280" MaximumHeightRequest="280"
+                      BackgroundColor="#2F2F2F">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -36,9 +37,9 @@
                 Orientation="Horizontal" 
                 VerticalOptions="Start"
                 HorizontalOptions="Center">
-                    <Label Text="Add suffix '-cmp'"
+                <Label Text="Add suffix '-cmp'"
                         VerticalOptions="Center" />
-                    <CheckBox IsChecked="true" x:Name="checkbox_Suffix"/>
+                <CheckBox IsChecked="true" x:Name="checkbox_Suffix"/>
             </StackLayout>
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button
