@@ -3,13 +3,28 @@
 public partial class MainPage : ContentPage
 {
     private readonly IFolderPicker _folderPicker;
-    public MainPage(IFolderPicker folderPicker)
+    private readonly IFFMpegPlugin _ffmpegPlugin;
+    public MainPage(IFolderPicker folderPicker, IFFMpegPlugin ffmpegPlugin)
     {
         InitializeComponent();
         listView.BindingContext = this;
 
         _folderPicker = folderPicker;
+        _ffmpegPlugin = ffmpegPlugin;
+
+        _ffmpegPlugin.Progress += ffmpegPlugin_Progress;
     }
+
+    private Task ffmpegPlugin_Progress(double percentage, int processingCount, string fileName)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            progressBar.Progress = percentage;
+            progressLabel.Text = $"{processingCount}/{VideoLocations.Count} - {fileName}";
+        });
+        return Task.CompletedTask;
+    }
+
     private async void OnCounterClicked(object sender, EventArgs e)
     {
         async Task<IEnumerable<string>> PickAndShow(PickOptions options)
@@ -37,7 +52,10 @@ public partial class MainPage : ContentPage
 
     private void StartBtn_Clicked(object sender, EventArgs e)
     {
-
+        foreach (var vid in VideoLocations)
+        {
+            _ffmpegPlugin.Queue(vid, folderLoc, checkbox_Suffix.IsChecked);
+        }
     }
     string folderLoc = "";
     private async void FolderBtn_Clicked(object sender, EventArgs e)
@@ -49,7 +67,6 @@ public partial class MainPage : ContentPage
     {
         try
         {
-
         }
         catch (Exception ex)
         {

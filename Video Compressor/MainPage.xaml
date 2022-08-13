@@ -19,7 +19,7 @@
                 
                 HorizontalOptions="Start" />
             </Frame>
-            <ListView x:Name="listView" ItemsSource="{Binding VideoLocations}">
+            <ListView x:Name="listView" ItemsSource="{Binding VideoLocations}" MaximumHeightRequest="280">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -32,11 +32,11 @@
                 </ListView.ItemTemplate>
             </ListView>
             <StackLayout
-                Margin="20"
+                Margin="6"
                 Orientation="Horizontal" 
                 VerticalOptions="Start"
                 HorizontalOptions="Center">
-                    <Label Text="Add suffix '-recovered'"
+                    <Label Text="Add suffix '-cmp'"
                         VerticalOptions="Center" />
                     <CheckBox IsChecked="true" x:Name="checkbox_Suffix"/>
             </StackLayout>
@@ -77,7 +77,14 @@
                 HorizontalOptions="Center" />
             </HorizontalStackLayout>
 
-            <ProgressBar x:Name="ProgressBar"/>
+            <Label
+                x:Name="progressLabel"
+                SemanticProperties.HeadingLevel="Level1"
+                Text="n/a"
+                FontSize="Body"
+                HorizontalOptions="Start" />
+            <ProgressBar x:Name="progressBar"
+                         ProgressColor="#3700B5"/>
         </VerticalStackLayout>
     </ScrollView>
 
