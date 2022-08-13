@@ -10,6 +10,7 @@ namespace Video_Compressor
     {
         public delegate Task OnProgress(double percentage, int processingCount, string fileName);
         public event OnProgress Progress;
+        public int ActiveThreads { get; set; }
         public void Queue(string inputPath, string outputFolder, bool addSuffix);
     }
 }

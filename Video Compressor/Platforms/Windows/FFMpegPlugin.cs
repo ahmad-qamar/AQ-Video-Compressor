@@ -11,7 +11,7 @@ namespace Video_Compressor.Platforms.Windows
         private bool isBusy = false;
         private int _processingCount = 0;
         private Queue<FFMpegVideo> _queue = new();
-
+        public int ActiveThreads { get; set; }
         public event IFFMpegPlugin.OnProgress Progress;
         public void Queue(string inputPath, string outputFolder, bool addSuffix)
         {
@@ -26,7 +26,7 @@ namespace Video_Compressor.Platforms.Windows
                 {
                     var vid = new FFMpegVideo(inputPath, outputFolder, addSuffix);
                     var outputPath = vid.OutputFolder + $"/{(Path.GetFileNameWithoutExtension(vid.InputPath) + (vid.AddSuffix ? "-cmp" : "")) + ".mp4"}";
-                    
+
                     _processingCount++;
 
                     Action<double> progressHandler = new Action<double>(p =>
@@ -42,6 +42,7 @@ namespace Video_Compressor.Platforms.Windows
                             .WithSpeedPreset(Speed.Faster)
                             .WithConstantRateFactor(21)
                             .WithAudioCodec(AudioCodec.Aac)
+                            .UsingThreads(ActiveThreads)
                             .WithFastStart())
                         .NotifyOnProgress(progressHandler, (await FFProbe.AnalyseAsync(vid.InputPath)).Duration);
 

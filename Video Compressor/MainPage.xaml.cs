@@ -21,6 +21,7 @@ public partial class MainPage : ContentPage
     private void CpuThreads_ValueChanged(object sender, ValueChangedEventArgs e)
     {
         threadLabel.Text = $"CPU Threads: {(int)e.NewValue}";
+        _ffmpegPlugin.ActiveThreads = (int)e.NewValue;
     }
 
     private Task ffmpegPlugin_Progress(double percentage, int processingCount, string fileName)
