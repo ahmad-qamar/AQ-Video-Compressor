@@ -13,6 +13,14 @@ public partial class MainPage : ContentPage
         _ffmpegPlugin = ffmpegPlugin;
 
         _ffmpegPlugin.Progress += ffmpegPlugin_Progress;
+
+        cpuThreads.Maximum = Environment.ProcessorCount;
+        cpuThreads.ValueChanged += CpuThreads_ValueChanged;
+    }
+
+    private void CpuThreads_ValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        threadLabel.Text = $"CPU Threads: {(int)e.NewValue}";
     }
 
     private Task ffmpegPlugin_Progress(double percentage, int processingCount, string fileName)

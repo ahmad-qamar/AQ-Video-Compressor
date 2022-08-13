@@ -19,8 +19,8 @@
                 
                 HorizontalOptions="Start" />
             </Frame>
-            <ListView x:Name="listView" ItemsSource="{Binding VideoLocations}" MinimumHeightRequest="280" MaximumHeightRequest="280"
-                      BackgroundColor="#2F2F2F">
+            <ListView x:Name="listView" ItemsSource="{Binding VideoLocations}" MinimumHeightRequest="280" MaximumHeightRequest="280" Margin="8"
+                      BackgroundColor="#222222">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -32,15 +32,20 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout
-                Margin="6"
-                Orientation="Horizontal" 
-                VerticalOptions="Start"
+            <HorizontalStackLayout
+                VerticalOptions="Center"
                 HorizontalOptions="Center">
-                <Label Text="Add suffix '-cmp'"
+                <VerticalStackLayout Margin="50,0" MinimumWidthRequest="120">
+                    <Label Text="CPU Threads" x:Name="threadLabel"
+                        HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Slider x:Name="cpuThreads" Minimum="1" Maximum="32"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Add suffix '-cmp'"
                         VerticalOptions="Center" />
-                <CheckBox IsChecked="true" x:Name="checkbox_Suffix"/>
-            </StackLayout>
+                    <CheckBox IsChecked="true" x:Name="checkbox_Suffix" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button
                 x:Name="CounterBtn"
